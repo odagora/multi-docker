@@ -4,23 +4,23 @@ services:
   - docker
 
 before_install:
-  - docker build -t ogonzalez29/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t odagora/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true ogonzalez29/react-test npm test
+  - docker run -e CI=true odagora/react-test npm test
 
 after_success:
-  - docker build -t ogonzalez29/multi-client ./client
-  - docker build -t ogonzalez29/multi-nginx ./nginx
-  - docker build -t ogonzalez29/multi-server ./server
-  - docker build -t ogonzalez29/multi-worker ./worker
+  - docker build -t odagora/multi-client ./client
+  - docker build -t odagora/multi-nginx ./nginx
+  - docker build -t odagora/multi-server ./server
+  - docker build -t odagora/multi-worker ./worker
   #Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   #Take those images and push them to docker hub
-  - docker push ogonzalez29/multi-client
-  - docker push ogonzalez29/multi-nginx
-  - docker push ogonzalez29/multi-server
-  - docker push ogonzalez29/multi-worker
+  - docker push odagora/multi-client
+  - docker push odagora/multi-nginx
+  - docker push odagora/multi-server
+  - docker push odagora/multi-worker
 
 deploy:
   provider: elasticbeanstalk
